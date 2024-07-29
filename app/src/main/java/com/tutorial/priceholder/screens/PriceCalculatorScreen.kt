@@ -121,15 +121,16 @@ fun CalculatingScreen(viewModel: StateViewModel){
             onClick = {
                 if (startDateDict["error"] == "false" && endDateDict["error"] == "false"){
                     val resultDict = runBlocking{
+                        noteList.clear()
                         getNotes(viewModel).forEach { noteList.add("${it.dateOfThatDay} -> ${it.noteForThatDay}") }
                         calculatePrice(startDate, endDate, viewModel)
                     }
                     result = "Ömer Abi Kişi Sayısı: ${resultDict["omerToplamKisi"]}\n" +
-                    "Ömer Abi Toplam Ücret: ${resultDict["omerToplamFiyat"]}\n" +
+                    "Ömer Abi taksi hariç toplam Ücret: ${resultDict["omerToplamFiyat"]}\n" +
                     "Diğer Şantiye Kişi Sayısı: ${resultDict["digerToplamKisi"]}\n" +
                     "Diğer Şantiye Toplam Ücret: ${resultDict["digerToplamFiyat"]}\n" +
                     "Taksi Ücreti: ${resultDict["taksiToplam"]}\n\n" +
-                    "Taksi ile birlikte toplam ücret: ${resultDict["taksiToplam"]!! + resultDict["omerToplamFiyat"]!!}"
+                    "Ömer Abi taksi ile birlikte toplam ücret: ${resultDict["taksiToplam"]!! + resultDict["omerToplamFiyat"]!!}"
                 }
             },
             modifier = Modifier.width(180.dp)
