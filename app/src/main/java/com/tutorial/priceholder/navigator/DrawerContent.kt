@@ -101,11 +101,12 @@ fun CustomizedItem(
     val text: String = matchTexts[destinationRoute] ?: "Hata"
 
     NavigationDrawerItem(
-        label = { Text(
-            text = text,
-            fontSize = 18.sp,
-            fontFamily = FontFamily(Font(R.font.opensans_semicondensed_italic, weight = FontWeight.Normal))
-        )
+        label = {
+            Text(
+                text = text,
+                fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.opensans_semicondensed_italic, weight = FontWeight.Normal))
+            )
         },
         selected = currentRoute == destinationRoute,
         onClick = {

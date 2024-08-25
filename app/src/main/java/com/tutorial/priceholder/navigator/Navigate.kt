@@ -30,5 +30,4 @@ class NavigateInMyApp (private val navController: NavHostController){
             launchSingleTop = true
         }
     }
-
 }

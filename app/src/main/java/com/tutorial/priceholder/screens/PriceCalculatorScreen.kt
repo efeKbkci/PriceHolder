@@ -122,7 +122,7 @@ fun CalculatingScreen(viewModel: StateViewModel){
                 if (startDateDict["error"] == "false" && endDateDict["error"] == "false"){
                     val resultDict = runBlocking{
                         noteList.clear()
-                        getNotes(viewModel).forEach { noteList.add("${it.dateOfThatDay} -> ${it.noteForThatDay}") }
+                        getNotes(startDate, endDate, viewModel).forEach { noteList.add("${it.dateOfThatDay} -> ${it.noteForThatDay}") }
                         calculatePrice(startDate, endDate, viewModel)
                     }
                     result = "Ömer Abi Kişi Sayısı: ${resultDict["omerToplamKisi"]}\n" +
@@ -212,9 +212,7 @@ suspend fun calculatePrice(start: String, end: String, viewModel: StateViewModel
     )
 }
 
-suspend fun getNotes(viewModel: StateViewModel) = runBlocking {
+suspend fun getNotes(start: String, end: String, viewModel: StateViewModel) = runBlocking {
 
-    val dbProcess = viewModel.dbProcess
-
-    dbProcess.getItems().filter { it.noteForThatDay.isNotEmpty() }
+    getAvaibleObjects(start, end, viewModel).filter { it.noteForThatDay.isNotEmpty() }
 }
